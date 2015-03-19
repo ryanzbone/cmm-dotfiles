@@ -1,0 +1,9 @@
+[user]
+	name = Ryan Bone
+	email = rbone@covermymeds.com
+[push]
+	default = simple
+[core]
+	excludesfile = /Users/rbone/.gitignore
+[alias]
+	co = checkout
