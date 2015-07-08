@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git brew)
 
 # User configuration
 
@@ -92,6 +92,7 @@ alias dc="git diff --cached"
 alias cm="git commit -m"
 alias ci="git commit -v"
 alias a="git add"
+alias gl="git log"
 alias ll="ls -lahG"
 alias be="bundle exec"
 alias rs="bundle exec rspec"
@@ -101,6 +102,10 @@ alias pair="cd ~/dev/pair"
 alias cop="bundle exec rubocop"
 alias rails="bundle exec rails"
 alias rake="bundle exec rake"
+alias setupdb="rake db:schema:dump; rake db:test:generate_schema; rake db:test:load_testing_schema"
+alias hp="cd ~/cmm/end_of_line; chruby ruby-2.0.0; git checkout master; git pull; bundle && TEST_ENV=integration rs -t happy_path && cd -"
+
+alias tmux="tmux -2"
 
 alias rr="afplay ~/Documents/SoundFX/readingrainbow.mp3"
 alias gameover="afplay ~/Documents/SoundFX/gameover.mp3"
@@ -115,9 +120,10 @@ export PATH="/usr/local/heroku/bin:$PATH"
 eval "$(ssh-agent)"
 
 # git pair
-alias startpair="git config user.name \"Brandon Joyce & Ryan Bone\"; git config user.email \"brandon-ryan@covermymeds.com\""
+alias startpair="git config user.name \"Rachel Layburn & Ryan Bone\"; git config user.email \"rlayburn+rb+rl@covermymeds.com\""
+alias stoppair="git config user.name \"Ryan Bone\"; git config user.email \"rbone@covermymeds.com\""
 
 ssh-add -L &> /dev/null
 if [ $? -eq 1 ]; then
-    ssh-add
-  fi
+  ssh-add
+fi

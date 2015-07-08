@@ -17,43 +17,11 @@ set colorcolumn=100
 highlight ColorColumn ctermbg=DarkGrey
 syntax on
 filetype plugin indent on
-"map <C-l> :tabn<CR>
-"map <C-h> :tabp<CR>
-"map <C-j> :bn<CR>
-"map <C-k> :bp<CR>
-" Tmux navigator
-"let g:tmux_navigator_no_mappings = 1
 
-"nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-"nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-"nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-"nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-"nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
-
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    silent! execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      call system("tmux select-pane -" . a:tmuxdir)
-      redraw!
-    endif
-  endfunction
-
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
-else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-endif
+map <C-l> :tabn<CR>
+map <C-h> :tabp<CR>
+map <C-j> :bn<CR>
+map <C-k> :bp<CR>
 
 imap <Tab> <C-P>
 let mapleader=","
@@ -61,9 +29,22 @@ map <Leader>w :w<Enter>
 map <Leader>q :q<Enter>
 map <Leader>cop :RuboCop<Enter>
 imap jj <Esc>
+nnoremap <Leader>o :CtrlP<CR>
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+set pastetoggle=<Leader>p
 
 " Clear search highlighting, hooray!
 map <Leader><Space> :noh<Enter>
+
+" Vim Rails leader commands
+map <Leader>a :A<Enter>
+map <Leader>r :R<Enter>
 
 command W w
 command Q q
@@ -148,3 +129,19 @@ nmap<Leader>t: :Tabularize /:\zs<CR>
 vmap<Leader>t: :Tabularize /:\zs<CR>
 nmap<Leader>t{ :Tabularize /{<CR>
 vmap<Leader>t{ :Tabularize /{<CR>
+nmap<Leader>t' :Tabularize /'<CR>
+vmap<Leader>t' :Tabularize /'<CR>
+nmap<Leader>t" :Tabularize /"<CR>
+vmap<Leader>t" :Tabularize /"<CR>
+
+let g:ctrlp_use_caching = 0
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+        \ }
+endif
