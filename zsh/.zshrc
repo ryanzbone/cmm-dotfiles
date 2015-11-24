@@ -100,10 +100,17 @@ alias cap="bundle exec cap"
 alias dev="cd ~/dev"
 alias pair="cd ~/dev/pair"
 alias cop="bundle exec rubocop"
-alias rails="bundle exec rails"
-alias rake="bundle exec rake"
 alias setupdb="rake db:schema:dump; rake db:test:generate_schema; rake db:test:load_testing_schema"
-alias hp="cd ~/cmm/end_of_line; chruby ruby-2.0.0; git checkout master; git pull; bundle && TEST_ENV=integration rs -t happy_path && cd -"
+alias hp="cd ~/cmm/end_of_line; chruby ruby-2.0.0; git checkout master; git pull; bundle && TEST_ENV=integration rs -t core && cd -"
+alias rail="rails"
+
+# Projects
+alias ehrengine="cd ~/cmm/vagrant/code/ehr_engine"
+alias epa="cd ~/cmm/vagrant/code/epa"
+alias youraccount="cd ~/cmm/vagrant/code/your-account-api"
+alias requestsapi="cd ~/cmm/vagrant/code/requests-api"
+alias requestpagesapi="cd ~/cmm/vagrant/code/request-pages-api"
+alias dashboard="cd ~/cmm/vagrant/code/dashboard"
 
 alias tmux="tmux -2"
 
@@ -113,15 +120,25 @@ alias job="afplay ~/Documents/SoundFX/job.mp3"
 alias noo="afplay ~/Documents/SoundFX/nooo.mp3"
 alias dangerzone="open spotify:track:2RtnoUsvJg3wMgMeEhG6fr"
 
+export CMM_API_KEY=fb01xpu9q2orm3m581pn
+export CMM_API_SECRET=oyudnd0gnah4zfp1cmo-b25tcnknxx349fa83pup
+export INTEGRATION_CMM_API_KEY=n1soipkqwoexrhxx7uvg
+export INTEGRATION_CMM_API_SECRET=6sgljns2vv61hoayhiu-y0tl8bl7xpv1aib800ni
+export CMM_GITHUB_OAUTH_TOKEN=a508f152d935f3124e0f5e801d28fc3378716125
+export PGDATA=Library/Application\ Support/Postgres/var-9.4/
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
 eval "$(ssh-agent)"
 
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+
+chruby 2.0.0-p643
 # git pair
 alias startpair="git config user.name \"Rachel Layburn & Ryan Bone\"; git config user.email \"rlayburn+rb+rl@covermymeds.com\""
 alias stoppair="git config user.name \"Ryan Bone\"; git config user.email \"rbone@covermymeds.com\""
+alias sshint="ssh deployer@lcimaster4.cmmint.net"
 
 ssh-add -L &> /dev/null
 if [ $? -eq 1 ]; then

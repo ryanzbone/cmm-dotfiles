@@ -28,6 +28,8 @@ let mapleader=","
 map <Leader>w :w<Enter>
 map <Leader>q :q<Enter>
 map <Leader>cop :RuboCop<Enter>
+map <Leader>s :SplitjoinSplit<Enter>
+map <Leader>j :SplitjoinJoin<Enter>
 imap jj <Esc>
 nnoremap <Leader>o :CtrlP<CR>
 vnoremap <silent> y y`]
@@ -62,6 +64,7 @@ autocmd BufWritePre * :TrailerTrim
 
 " Commonly misspelled words
 iab recieve receive
+iab ture true
 
 " Ctrl-c/x to clipboard
 vmap <C-x> :!pbcopy<CR>
