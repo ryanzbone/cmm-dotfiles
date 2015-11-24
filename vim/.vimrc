@@ -1,5 +1,7 @@
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 call pathogen#helptags()
+
 set nocompatible
 set number
 set ruler
