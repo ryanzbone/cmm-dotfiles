@@ -4,6 +4,6 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /Users/rbone/.gitignore
+	excludesfile = ~/.gitignore
 [alias]
 	co = checkout
