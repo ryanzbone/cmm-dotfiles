@@ -27,7 +27,7 @@ alias youraccount="cd ~/cmm/vagrant/code/your-account-api"
 alias requestsapi="cd ~/cmm/vagrant/code/requests-api"
 alias requestpagesapi="cd ~/cmm/vagrant/code/request-pages-api"
 alias dashboard="cd ~/cmm/vagrant/code/dashboard"
-alias vagrant="cd ~/cmm/vagrant"
+alias vssh="cd ~/cmm/vagrant; vagrant ssh"
 
 alias tmux="tmux -2"
 
