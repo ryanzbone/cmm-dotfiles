@@ -1,10 +1,12 @@
 alias s="git status"
 alias pull="git pull"
+alias pu="git push"
 alias push="git push"
 alias b="git branch"
 alias co="git checkout"
 alias d="git diff --color"
 alias dc="git diff --cached"
+alias ds="git diff --stat"
 alias cm="git commit -m"
 alias ci="git commit -v"
 alias a="git add"
@@ -15,24 +17,48 @@ alias rs="bundle exec rspec"
 alias cap="bundle exec cap"
 alias dev="cd ~/dev"
 alias pair="cd ~/dev/pair"
-alias cop="bundle exec rubocop"
+alias cop="bundle exec rubocop -D"
+alias copa="bundle exec rubocop -D -a"
+alias cops="git diff --name-only master | xargs bundle exec rubocop"
 alias setupdb="rake db:schema:dump; rake db:test:generate_schema; rake db:test:load_testing_schema"
 alias hp="cd ~/cmm/end_of_line; chruby ruby-2.0.0; git checkout master; git pull; bundle && TEST_ENV=integration rs -t core && cd -"
 alias rail="rails"
+alias bail="bundle exec rails"
+alias bails="bundle exec rails"
+alias hieradataupdate="git checkout production && git fetch upstream && git merge upstream/production && git push origin"
 
 # Projects
-alias ehrengine="cd ~/cmm/vagrant/code/ehr_engine"
+alias ncpdpehr="cd ~/cmm/vagrant/code/ncpdp-ehr"
+alias ehrengine="cd ~/cmm/vagrant/code/ehr-engine"
 alias epa="cd ~/cmm/vagrant/code/epa"
 alias youraccount="cd ~/cmm/vagrant/code/your-account-api"
 alias requestsapi="cd ~/cmm/vagrant/code/requests-api"
 alias requestpagesapi="cd ~/cmm/vagrant/code/request-pages-api"
 alias dashboard="cd ~/cmm/vagrant/code/dashboard"
-alias vssh="cd ~/cmm/vagrant; vagrant ssh"
+alias eol="cd ~/cmm/vagrant/code/end_of_line"
+alias vsh="cd ~/cmm/vagrant; ssh vagrant"
 
 alias tmux="tmux -2"
 
-alias startpair="git config user.name \"Rachel Layburn & Ryan Bone\"; git config user.email \"rlayburn+rb+rl@covermymeds.com\""
-alias stoppair="git config user.name \"Ryan Bone\"; git config user.email \"rbone@covermymeds.com\""
 alias sshint="ssh deployer@lcimaster4.cmmint.net"
 
-alias vb="ruby ~/dev/helper-scripts/vagrant_bundle.rb"
+alias vb="ruby ~/dev/helper-scripts/vagrant_command.rb bundle install"
+alias vrs="ruby ~/dev/helper-scripts/vagrant_command.rb bundle exec rspec"
+
+alias ehr1="ssh deployer@mitehr1n1.cmmint.net"
+alias ehr2="ssh deployer@mitehr2n1.cmmint.net"
+alias ehr3="ssh deployer@mitehr3n1.cmmint.net"
+alias ehr4="ssh deployer@mitehr4n1.cmmint.net"
+alias support1="ssh deployer@mitsupport1n1.cmmint.net"
+alias support2="ssh deployer@mitsupport2n1.cmmint.net"
+alias support3="ssh deployer@mitsupport3n1.cmmint.net"
+
+alias eol1="cd ~/cmm/vagrant/code/end_of_line & TEST_ENV=ehr1 rs -t regression | tee test.log"
+
+alias gem_update="./Users/rbone/dev/single_gem_update"
+
+alias bake="bundle exec rake"
+
+alias irb="pry"
+
+tssh() { tmate display -p '#{tmate_ssh}' | pbcopy; }

@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export PGDATA=~/testdb
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="Honukai"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -78,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.shell_prompt.sh
+#source ~/.shell_prompt.sh
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
@@ -95,18 +96,19 @@ export CMM_API_SECRET=oyudnd0gnah4zfp1cmo-b25tcnknxx349fa83pup
 export INTEGRATION_CMM_API_KEY=n1soipkqwoexrhxx7uvg
 export INTEGRATION_CMM_API_SECRET=6sgljns2vv61hoayhiu-y0tl8bl7xpv1aib800ni
 export CMM_GITHUB_OAUTH_TOKEN=a508f152d935f3124e0f5e801d28fc3378716125
-export PGDATA=Library/Application\ Support/Postgres/var-9.4/
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-eval "$(ssh-agent)"
+#export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+chruby 2.4.3
 
-chruby 2.0.0-p643
+# for some reason my current setup only has my public github ssh key in the ssh-agent, so this adds
+# the default one, id_rsa, used for cmm work, and hides the output
+ssh-add &> /dev/null
 
-ssh-add -L &> /dev/null
-if [ $? -eq 1 ]; then
-  ssh-add
+# Add hoem bin to path if it's there
+if [ -d "$HOME/bin" ] ; then
+  PATH="$PATH:$HOME/bin"
 fi

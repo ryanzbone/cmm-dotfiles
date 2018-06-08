@@ -6,6 +6,7 @@ set nocompatible
 set number
 set ruler
 set tabstop=2 shiftwidth=2
+autocmd Filetype php setlocal tabstop=4 shiftwidth=4
 set expandtab
 set autoindent
 set hlsearch
@@ -32,8 +33,8 @@ map <Leader>q :q<Enter>
 map <Leader>cop :RuboCop<Enter>
 map <Leader>s :SplitjoinSplit<Enter>
 map <Leader>j :SplitjoinJoin<Enter>
+map <Leader>ci :!git commit -v<Enter>
 imap jj <Esc>
-nnoremap <Leader>o :CtrlP<CR>
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
@@ -48,6 +49,8 @@ map <Leader><Space> :noh<Enter>
 
 " Vim Rails leader commands
 map <Leader>a :A<Enter>
+map <Leader>e :Emodel<Enter>
+map <Leader>v :Eview<Enter>
 map <Leader>r :R<Enter>
 
 command W w
@@ -57,7 +60,6 @@ command Wq wq
 
 let g:airline_powerline_fonts       = 1
 let g:vim_markdown_folding_disabled =1
-
 
 set pastetoggle=<F2>
 
@@ -81,8 +83,8 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " Ruby Runner settings
-command! FR set filetype=ruby
-map <leader>r :RubyBuffer <cr>
+"command! FR set filetype=ruby
+"map <leader>r :RubyBuffer <cr>
 
 let g:promptline_preset = {
         \'a' : [ '%*' ],
@@ -150,3 +152,34 @@ else
         \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
         \ }
 endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'))
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+let g:ctrlp_custom_ignore = '^vendor\/bundle*'
