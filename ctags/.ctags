@@ -1,0 +1,4 @@
+--exclude=.git
+--exclude=vendor/*
+--exclude=db/*
+--exclude=log/*

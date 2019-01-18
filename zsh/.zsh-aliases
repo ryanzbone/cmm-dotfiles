@@ -35,6 +35,7 @@ alias youraccount="cd ~/cmm/vagrant/code/your-account-api"
 alias requestsapi="cd ~/cmm/vagrant/code/requests-api"
 alias requestpagesapi="cd ~/cmm/vagrant/code/request-pages-api"
 alias dashboard="cd ~/cmm/vagrant/code/dashboard"
+alias hubservices="cd ~/cmm/dev/aps/hubservices"
 alias eol="cd ~/cmm/vagrant/code/end_of_line"
 alias vsh="cd ~/cmm/vagrant; ssh vagrant"
 
@@ -53,12 +54,13 @@ alias support1="ssh deployer@mitsupport1n1.cmmint.net"
 alias support2="ssh deployer@mitsupport2n1.cmmint.net"
 alias support3="ssh deployer@mitsupport3n1.cmmint.net"
 
-alias eol1="cd ~/cmm/vagrant/code/end_of_line & TEST_ENV=ehr1 rs -t regression | tee test.log"
+#alias eol1="cd ~/cmm/vagrant/code/end_of_line & TEST_ENV=ehr1 rs -t regression | tee test.log"
 
-alias gem_update="./Users/rbone/dev/single_gem_update"
+#alias gem_update="./Users/rbone/dev/single_gem_update"
 
 alias bake="bundle exec rake"
 
 alias irb="pry"
 
 tssh() { tmate display -p '#{tmate_ssh}' | pbcopy; }
+shovel() ( cd ~/cmm/dev && ./script/run shovel "$@"; )

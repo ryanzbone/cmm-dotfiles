@@ -2,6 +2,8 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 call pathogen#helptags()
 
+let mapleader=","
+
 set nocompatible
 set number
 set ruler
@@ -21,16 +23,18 @@ highlight ColorColumn ctermbg=DarkGrey
 syntax on
 filetype plugin indent on
 
+" Move left and right through tabs, up and down through buffers
 map <C-l> :tabn<CR>
 map <C-h> :tabp<CR>
 map <C-j> :bn<CR>
 map <C-k> :bp<CR>
 
-imap <Tab> <C-P>
-let mapleader=","
+" Fast save and quit
 map <Leader>w :w<Enter>
 map <Leader>q :q<Enter>
+
 map <Leader>cop :RuboCop<Enter>
+
 map <Leader>s :SplitjoinSplit<Enter>
 map <Leader>j :SplitjoinJoin<Enter>
 map <Leader>ci :!git commit -v<Enter>
@@ -183,3 +187,9 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 
 let g:ctrlp_custom_ignore = '^vendor\/bundle*'
+
+" Show vertical column on cursor location in haml files
+autocmd FileType haml setlocal cursorcolumn
+
+" Only use ctags and current file for autocomplete
+set complete=.,t
